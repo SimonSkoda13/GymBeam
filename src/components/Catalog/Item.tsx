@@ -7,32 +7,32 @@ import { IItem } from "../../../lib/models/Item";
  * @returns JSX.Element
  */
 export function CatalogItem(props: IItem) {
-  const { id, name, formatted_price, rating_summary, thumbnail } = props;
+  const { name, formatted_price, rating_summary, thumbnail } = props;
 
   return (
     <div className="relative flex max-w-sm flex-col justify-between rounded-lg border border-gray-100 bg-white shadow-md px-3 py-3 md:py-6 md:px-5">
       <a href="">
+        {/* Image */}
         <div className="relative">
-          {/* Define the height of the image container */}
           <Image
             alt="item picture"
             src={thumbnail}
-            layout="responsive"
             width={500}
             height={500}
-            objectFit="cover"
+            className="object-cover"
           />
-          {/* Use objectFit to control how the image fills the container */}
         </div>
-        <h5 className="text-lg tracking-tight text-slate-900">{name}</h5>
 
+        {/* Name */}
+        <h5 className="text-lg tracking-tight text-slate-900">{name}</h5>
+        {/* Price */}
         <div className="mt-2 mb-5 flex items-center justify-between">
           <p>
             <span className="text-xl font-bold text-slate-900">
               {formatted_price}
             </span>
           </p>
-          {/* Assuming rating is always 5 for simplicity, but you can make it dynamic */}
+          {/* Rating */}
           <div className="flex items-center">
             <span className="flex flex-row items-center mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-1 text-xs font-semibold gap-1">
               <h3>{rating_summary.toFixed(1)} %</h3>
@@ -47,6 +47,7 @@ export function CatalogItem(props: IItem) {
           </div>
         </div>
       </a>
+      {/* Add to cart */}
       <button
         // onClick={}
         className="flex w-full items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-primary-300"

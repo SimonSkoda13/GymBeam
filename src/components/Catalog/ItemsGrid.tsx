@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { CatalogItem } from "./Item";
-import Image from "next/image";
 import { IItem } from "../../../lib/models/Item";
 
 export interface ICatalogItemsGridProps {
   items: IItem[];
+  id?: string;
 }
 
 /**
@@ -15,9 +14,12 @@ export interface ICatalogItemsGridProps {
  * @returns JSX.Element
  */
 export function CatalogItemsGrid(props: ICatalogItemsGridProps) {
-  const { items } = props;
+  const { items, id } = props;
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 content-center">
+    <div
+      className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 content-center"
+      id={id}
+    >
       {items?.map((item) => {
         return <CatalogItem key={"item-" + item.id} {...item} />;
       })}

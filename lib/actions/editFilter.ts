@@ -1,38 +1,34 @@
 import { IEditFilterDTO } from "../models/Filter/EditFilterDTO";
 
 /**
- * Takes current filter string, filterEdit object and decides if it is valid
+ * Takes current filters, filterEdit object and decides if add or remove it
  * @param filterString string
  * @param filterEdit IEditFilter
  * @returns string
  */
 export const editFilter = (
-  filterString: string,
-  filterEdit: IEditFilterDTO
-) => {
-  // copy of current string
-  let newString = filterString;
+  newFilter: IEditFilterDTO,
+  currentFilters: IEditFilterDTO[]
+): IEditFilterDTO[] => {
+  // Check if newFilter is a "price" filter
+  if (newFilter.value.includes("price")) {
+    // Remove all existing "price" filters, only if newFilter is also a "price" filter
+    const filtersWithoutPrice = currentFilters.filter(
+      (filter) => !filter.value.includes("price")
+    );
+    return [...filtersWithoutPrice, newFilter];
+  } else {
+    // For non-"price" filters, check if the exact filter already exists
+    const filterExistsIndex = currentFilters.findIndex(
+      (filter) => filter.value === newFilter.value
+    );
 
-  const queryParams = new URLSearchParams(filterString);
-
-  // if filter is price
-  if (queryParams.has("price") && filterEdit.value.includes("price")) {
-    // set new price filter in params object
-    queryParams.set("price", filterEdit.value.split("=")[1]);
-    // set new string with missing '&'
-    newString = `&${queryParams.toString()}`;
+    if (filterExistsIndex !== -1) {
+      // If the filter exists, remove it
+      return currentFilters.filter((_, index) => index !== filterExistsIndex);
+    } else {
+      // If it doesn't exist, add the new filter
+      return [...currentFilters, newFilter];
+    }
   }
-
-  //  if new filter is currently there
-  else if (filterString.includes(filterEdit.value)) {
-    // delete filter from params
-    newString = filterString.replace(filterEdit.value, "");
-  }
-
-  // if all is right
-  else {
-    newString += filterEdit.value;
-  }
-
-  return newString;
 };

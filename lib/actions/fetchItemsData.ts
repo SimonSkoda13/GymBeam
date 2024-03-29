@@ -1,5 +1,4 @@
 "use server";
-
 /**
  * Returns response data of all items in category 2416,
  * If response is not ok, throws error
@@ -25,7 +24,7 @@ export async function fetch_all_items_data() {
     const jsonData = await response.json();
     return jsonData;
   } catch (error) {
-    console.error("Failed to fetch product data:", error);
+    console.error("Failed to fetch products data:", error);
   }
 }
 
@@ -39,6 +38,7 @@ export async function fetch_all_items_data() {
 export async function fetch_filtered_items_data(filter: string) {
   const url =
     process.env.BACKEND_URL + "catalog/products?category_ids[]=2416" + filter;
+
   try {
     const response = await fetch(url, {
       headers: {
@@ -46,7 +46,6 @@ export async function fetch_filtered_items_data(filter: string) {
         "Content-Type": "application/json",
       },
     });
-    console.log(url);
 
     if (!response.ok) {
       throw new Error("Items response was not ok");
@@ -54,6 +53,6 @@ export async function fetch_filtered_items_data(filter: string) {
     const jsonData = await response.json();
     return jsonData;
   } catch (error) {
-    console.error("Failed to fetch product data:", error);
+    console.error("Failed to fetch products data:", error);
   }
 }

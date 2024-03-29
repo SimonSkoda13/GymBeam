@@ -1,23 +1,41 @@
-import * as React from "react";
-import { ICatalogFilterProps } from "../Filter";
 import { ICheckBoxFilter } from "../../../../../lib/models/Filter/CheckBoxFilter";
+import { useFilters } from "../../../../../lib/contexts/Filters/FiltersContext";
+import { useEffect, useState } from "react";
 
-export interface ICheckBoxFilterProps
-  extends ICatalogFilterProps,
-    ICheckBoxFilter {}
+/**
+ * This is an component for checkbox type filter
+ * @param props ICheckBoxFilter
+ * @returns JSX.Element
+ */
+export function CheckBoxFilter(props: ICheckBoxFilter) {
+  const { options, code, name } = props;
+  const { editAppliedFilters, appliedFilters } = useFilters();
+  const [checked, setChecked] = useState(false);
 
-export function CheckBoxFilter(props: ICheckBoxFilterProps) {
-  const { setFilterEdit, options, code, name } = props;
+  // when applied filters change check if new filters include this checkbox filter
+  useEffect(() => {
+    const filterValue = `&${code}[]=${options[0].value}`;
+    const isFilterApplied = appliedFilters.some(
+      (filter) => filter.value === filterValue
+    );
+    setChecked(isFilterApplied);
+  }, [appliedFilters, code, options]);
+
   return (
     <div className="inline-flex items-center mx-2">
+      {/* Checkbox */}
       <label
         className="relative flex items-center p-3 rounded-full cursor-pointer"
         htmlFor={"checkbox" + code}
       >
         <input
           type="checkbox"
+          checked={checked}
           onChange={() =>
-            setFilterEdit({ value: `&${code}[]=${options[0].value}` })
+            editAppliedFilters({
+              value: `&${code}[]=${options[0].value}`,
+              name: name,
+            })
           }
           className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-primary checked:bg-primary checked:before:bg-primary hover:before:opacity-10"
           id={"checkbox" + code}
@@ -39,6 +57,7 @@ export function CheckBoxFilter(props: ICheckBoxFilterProps) {
           </svg>
         </span>
       </label>
+      {/* Label */}
       <label
         className="mt-px font-light text-gray-700 cursor-pointer select-none"
         htmlFor={"checkbox" + code}

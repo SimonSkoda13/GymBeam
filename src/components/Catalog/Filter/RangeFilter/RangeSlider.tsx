@@ -1,8 +1,10 @@
 import React, { useState, useEffect, Dispatch } from "react";
-import { ICatalogRangeFilter } from "./RangeFilter";
-import { IRange } from "../../../../../lib/models/Filter/RangeFilter";
+import {
+  IRange,
+  IRangeFilter,
+} from "../../../../../lib/models/Filter/RangeFilter";
 
-export interface IRangeSlider extends ICatalogRangeFilter {
+export interface IRangeSlider extends IRangeFilter {
   setRange: Dispatch<IRange>;
   range: IRange;
 }
@@ -16,6 +18,7 @@ export function RangeSlider(props: IRangeSlider) {
   // Update thumb positions whenever minPrice or maxPrice changes
   useEffect(() => {
     setRange({ min: minCurrentPrice, max: maxCurrentPrice });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [minCurrentPrice, maxCurrentPrice]);
 
   const minThumb = ((minCurrentPrice - min) / (max - min)) * 100;
