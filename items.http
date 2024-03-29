@@ -1,0 +1,6 @@
+GET "https://gymbeam.sk/rest/V1/gb/catalog/products?category_ids[]=2416"
+
+HEAD : 
+    Accept: "application/json",
+    Content-Type: "application/json",
+
