@@ -38,7 +38,7 @@ export function CatalogFilter(props: ICatalogFilterParentProps) {
   }>({});
   useEffect(() => {
     const filtersObject: { [key: string]: IFilter[] } = {};
-    filters.forEach((filter) => {
+    filters?.forEach((filter) => {
       filtersObject[filter.type] = filtersObject[filter.type]
         ? [...filtersObject[filter.type], filter]
         : [filter];
