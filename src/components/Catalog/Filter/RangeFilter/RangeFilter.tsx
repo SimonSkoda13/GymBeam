@@ -7,6 +7,11 @@ import {
 import { RangeSlider } from "./RangeSlider";
 import { useFilters } from "../../../../../lib/contexts/Filters/FiltersContext";
 
+/**
+ * This is a component for displaying range filter
+ * @param props IRangeFilter
+ * @returns JSX.Element
+ */
 export function RangeFilter(props: IRangeFilter) {
   const { max, min } = props;
   const { editAppliedFilters } = useFilters();

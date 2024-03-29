@@ -15,7 +15,7 @@ import { useFilters } from "../../../../lib/contexts/Filters/FiltersContext";
 import { SectionDivider } from "@/components/SectionDivider";
 
 /**
- * Interface of parent CatalogFilter props
+ * This is an interface of parent CatalogFilter props
  */
 export interface ICatalogFilterParentProps {
   filters: IFilter[];
@@ -24,7 +24,7 @@ export interface ICatalogFilterParentProps {
 }
 
 /**
- * This is component for displaying and wrapping all filters for items and applied filters
+ * This is a component for displaying and wrapping all filters for items and applied filters
  * @param props ICatalogFilterParentProps
  * @returns JSX.Element
  */

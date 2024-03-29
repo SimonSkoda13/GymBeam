@@ -5,15 +5,24 @@ import { FiltersContext } from "./FiltersContext";
 import { IEditFilterDTO } from "../../models/Filter/EditFilterDTO";
 import { editFilter } from "../../actions/editFilter";
 
-interface FilterProviderProps {
+/**
+ * This is an interface for Filters Context Provider
+ */
+interface FiltersProviderProps {
   children: ReactNode;
 }
 
-export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
+/**
+ * This is a component for Filters Context Provider
+ * @param props FiltersProviderProps
+ * @returns JSX.Element
+ */
+export function FiltersProvider(props: FiltersProviderProps) {
+  const { children } = props;
+
   const [appliedFilters, setAppliedFilters] = useState<IEditFilterDTO[]>([]);
 
   const editAppliedFilters = (newFilter: IEditFilterDTO) => {
-    const newFilters = editFilter(newFilter, appliedFilters);
     setAppliedFilters(editFilter(newFilter, appliedFilters));
   };
 
@@ -22,4 +31,4 @@ export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
       {children}
     </FiltersContext.Provider>
   );
-};
+}

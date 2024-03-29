@@ -2,7 +2,7 @@ import Image from "next/image";
 import { IItem } from "../../../lib/models/Item";
 
 /**
- * This component has the responsibility of displaying a single item from catalog.
+ * This a component has the responsibility of displaying a single item from catalog.
  * @param props IItem
  * @returns JSX.Element
  */
@@ -13,14 +13,15 @@ export function CatalogItem(props: IItem) {
     <div className="relative flex max-w-sm flex-col justify-between rounded-lg border border-gray-100 bg-white shadow-md px-3 py-3 md:py-6 md:px-5">
       <a href="">
         {/* Image */}
-        <div className="relative">
-          <Image
-            alt="item picture"
-            src={thumbnail}
-            width={500}
-            height={500}
-            className="object-cover"
-          />
+        <div className="relative w-full" style={{ paddingTop: "100%" }}>
+          <div className="absolute top-0 left-0 right-0 bottom-0">
+            <Image
+              alt="item picture"
+              src={thumbnail}
+              fill
+              className="object-contain"
+            />
+          </div>
         </div>
 
         {/* Name */}
@@ -35,7 +36,7 @@ export function CatalogItem(props: IItem) {
           {/* Rating */}
           <div className="flex items-center">
             <span className="flex flex-row items-center mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-1 text-xs font-semibold gap-1">
-              <h3>{rating_summary.toFixed(1)} %</h3>
+              <h3>{rating_summary} %</h3>
               <svg
                 aria-hidden="true"
                 className="size-5 text-yellow-500"

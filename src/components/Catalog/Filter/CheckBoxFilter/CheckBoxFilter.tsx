@@ -3,7 +3,7 @@ import { useFilters } from "../../../../../lib/contexts/Filters/FiltersContext";
 import { useEffect, useState } from "react";
 
 /**
- * This is an component for checkbox type filter
+ * This is a component for checkbox type filter
  * @param props ICheckBoxFilter
  * @returns JSX.Element
  */

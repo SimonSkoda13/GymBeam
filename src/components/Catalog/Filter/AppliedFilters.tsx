@@ -14,7 +14,7 @@ export interface ICatalogAppliedFiltersProps {
  * @param props ICatalogAppliedFiltersProps
  * @returns JSX.Element
  */
-export const CatalogAppliedFilters = (props: ICatalogAppliedFiltersProps) => {
+export function CatalogAppliedFilters(props: ICatalogAppliedFiltersProps) {
   const { filters } = props;
   const { editAppliedFilters } = useFilters();
   return (
@@ -46,4 +46,4 @@ export const CatalogAppliedFilters = (props: ICatalogAppliedFiltersProps) => {
       })}
     </div>
   );
-};
+}

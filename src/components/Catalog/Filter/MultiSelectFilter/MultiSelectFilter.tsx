@@ -3,7 +3,7 @@ import { IMultiSelectFilter } from "../../../../../lib/models/Filter/MultiSelect
 import { useFilters } from "../../../../../lib/contexts/Filters/FiltersContext";
 
 /**
- * This is an component for multiselect type filter
+ * This is a component for multiselect type filter
  * @param props IMultiSelectFilter
  * @returns JS.Element
  */
@@ -19,6 +19,7 @@ export function MultiSelectFilter(props: IMultiSelectFilter) {
 
   return (
     <div className="relative my-3" id={"multiselect" + code}>
+      {/* Main button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex flex-row px-4 py-2 text-left ring-gray-200 ring-2 w-full rounded-md justify-between"
